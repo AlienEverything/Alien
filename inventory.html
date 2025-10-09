@@ -5,362 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🎒 Alien Inventory</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron :wght@400;700;900&display=swap');
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
-      min-height: 100vh;
-      color: #00ff88;
-      overflow-x: hidden;
-      position: relative;
-    }
-    
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #ffffff;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: twinkle 3s infinite alternate;
-    }
-    
-    @keyframes twinkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 10;
-    }
-    
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.3); }
-      50% { box-shadow: 0 0 50px rgba(0, 255, 136, 0.6); }
-      100% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.3); }
-    }
-    
-    .title {
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin-bottom: 10px;
-      text-shadow: 0 0 20px #00ff88;
-      background: linear-gradient(45deg, #00ff88, #00ccff, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .subtitle {
-      font-size: 1.1rem;
-      opacity: 0.8;
-      letter-spacing: 2px;
-    }
-    
-    .credits-display {
-      text-align: center;
-      font-size: 1.2rem;
-      margin: 20px 0;
-      color: #00ccff;
-    }
-    
-    .inventory-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    
-    .item-card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff88;
-      border-radius: 15px;
-      padding: 30px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-    
-    .item-card:hover {
-      transform: translateY(-5px);
-      border-color: #00ccff;
-      box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
-    }
-    
-    .item-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    
-    .item-title {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-    }
-    
-    .item-count {
-      font-size: 1.2rem;
-      color: #00ccff;
-      margin-bottom: 20px;
-    }
-    
-    .use-button {
-      background: linear-gradient(45deg, #00ff88, #00ccff);
-      border: none;
-      border-radius: 10px;
-      padding: 12px 25px;
-      color: #000;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .use-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
-    }
-    
-    .no-items {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-top: 40px;
-      color: #00ccff;
-      opacity: 0.7;
-    }
-    
-    .back-button {
-      display: block;
-      margin: 40px auto 0;
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-family: 'Orbitron', monospace;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      width: fit-content;
-    }
-    
-    .back-button:hover {
-      background: #00ff88;
-      color: #000;
-      transform: scale(1.05);
-    }
-    
-    @media (max-width: 768px) {
-      .title {
-        font-size: 2rem;
-      }
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Orbitron',monospace;min-height:100vh;color:var(--text-primary);overflow-x:hidden;position:relative;transition:all 0.5s ease}
+    body.theme-1,body.theme-2,body.theme-13{background:linear-gradient(135deg,#ffc0e5,#d4a5ff,#a5c4ff);--text-primary:#fff;--accent:#ff1493;--card-bg:rgba(255,20,147,0.2)}
+    body.theme-3{background:linear-gradient(135deg,#001a33,#003d5c,#00ffc8);--text-primary:#00ffc8;--accent:#00ffc8;--card-bg:rgba(0,255,200,0.2)}
+    body.theme-4,body.theme-5{background:linear-gradient(135deg,#4a2c0a,#8b5a00,#ffb347);--text-primary:#ffcc80;--accent:#ff9800;--card-bg:rgba(255,152,0,0.2)}
+    body.theme-6{background:linear-gradient(135deg,#1a0000,#4d0000,#ff4500);--text-primary:#ff6347;--accent:#ff4500;--card-bg:rgba(255,69,0,0.2)}
+    body.theme-7,body.theme-8,body.theme-9{background:linear-gradient(135deg,#001a33,#003d66,#0088cc);--text-primary:#87ceeb;--accent:#1e90ff;--card-bg:rgba(30,144,255,0.2)}
+    body.theme-10,body.theme-11{background:linear-gradient(135deg,#1a3a1a,#2d5a2d,#4a7c4a);--text-primary:#90ee90;--accent:#32cd32;--card-bg:rgba(50,205,50,0.2)}
+    body.theme-12{background:linear-gradient(135deg,#ff9a8b,#ff6a88,#ff99ac);--text-primary:#fff;--accent:#ff1493;--card-bg:rgba(255,255,255,0.2)}
+    body.theme-starry{background:linear-gradient(135deg,#1a0033,#2d004d,#4d1a7f);--text-primary:#e0b0ff;--accent:#b77bff;--card-bg:rgba(224,176,255,0.2)}
+    body.theme-15,body.theme-16,body.theme-17,body.theme-18,body.theme-19{background:linear-gradient(135deg,#0d1b2a,#1b263b,#415a77);--text-primary:#90e0ef;--accent:#00b4d8;--card-bg:rgba(0,180,216,0.2)}
+    body.theme-20,body.theme-26,body.theme-27,body.theme-28,body.theme-29,body.theme-41,body.theme-42,body.theme-43,body.theme-44,body.theme-45,body.theme-46{background:linear-gradient(135deg,#0a0015,#1a0033,#2d0052);--text-primary:#b794f6;--accent:#805ad5;--card-bg:rgba(183,148,246,0.2)}
+    body.theme-21{background:linear-gradient(135deg,#1a0a00,#331a0a,#4d2a1a);--text-primary:#ffa07a;--accent:#ff6347;--card-bg:rgba(255,160,122,0.2)}
+    body.theme-22,body.theme-23,body.theme-24,body.theme-25,body.theme-34,body.theme-35,body.theme-36{background:linear-gradient(135deg,#2d1810,#4a2c1a,#5c3a20);--text-primary:#d4af37;--accent:#cd853f;--card-bg:rgba(212,175,55,0.2)}
+    body.theme-30,body.theme-33{background:linear-gradient(135deg,#e8e8e8,#f0f0f0,#f8f8f8);--text-primary:#333;--accent:#666;--card-bg:rgba(255,255,255,0.5)}
+    body.theme-31,body.theme-32{background:linear-gradient(135deg,#1a1a1a,#2d2d2d,#404040);--text-primary:#e0e0e0;--accent:#999;--card-bg:rgba(255,255,255,0.15)}
+    body.theme-37,body.theme-47{background:linear-gradient(135deg,#000,#0d0d0d,#1a1a1a);--text-primary:#fff;--accent:#d4af37;--card-bg:rgba(212,175,55,0.2)}
+    body.theme-38{background:linear-gradient(135deg,#fef9e7,#fff9e6,#fffef0);--text-primary:#6b5b3d;--accent:#a0826d;--card-bg:rgba(160,130,109,0.3)}
+    body.theme-39,body.theme-40{background:linear-gradient(135deg,#002b36,#073642,#0d4a5a);--text-primary:#2aa198;--accent:#268bd2;--card-bg:rgba(42,161,152,0.2)}
+    body.font-small{font-size:14px}
+    body.font-medium{font-size:16px}
+    body.font-large{font-size:18px}
+    .hover-buttons{position:fixed;top:20px;right:20px;z-index:1000;display:flex;gap:10px}
+    .hover-btn{background:var(--card-bg);border:2px solid var(--accent);color:var(--text-primary);padding:10px 15px;border-radius:10px;cursor:pointer;font-family:'Orbitron',monospace;font-size:0.9rem;backdrop-filter:blur(10px);font-weight:600;transition:transform 0.2s}
+    .hover-btn:hover{transform:scale(1.05)}
+    .music-player{position:fixed;bottom:20px;right:20px;background:var(--card-bg);border:2px solid var(--accent);border-radius:15px;padding:15px;backdrop-filter:blur(10px);z-index:1000;display:flex;gap:10px}
+    .music-player.hidden{display:none}
+    .music-btn{background:var(--accent);border:none;color:#000;padding:8px 12px;border-radius:8px;cursor:pointer;font-family:'Orbitron',monospace;font-weight:700;transition:transform 0.2s}
+    .music-btn:hover{transform:scale(1.1)}
+    .container{max-width:1200px;margin:0 auto;padding:40px 20px;position:relative;z-index:10}
+    .header{text-align:center;margin-bottom:40px;background:var(--card-bg);border:2px solid var(--accent);border-radius:20px;padding:30px;backdrop-filter:blur(10px)}
+    .title{font-size:2.5rem;font-weight:900;margin-bottom:10px;text-shadow:0 0 20px var(--accent);color:var(--text-primary)}
+    .subtitle{font-size:1.1rem;opacity:0.8;letter-spacing:2px;color:var(--text-primary)}
+    .credits-display{text-align:center;font-size:1.2rem;margin:20px 0;color:var(--accent);font-weight:700}
+    .sort-controls{text-align:center;margin-bottom:20px}
+    .sort-label{color:var(--text-primary);margin-right:10px;font-weight:600}
+    .sort-btn{background:var(--card-bg);border:2px solid var(--accent);color:var(--text-primary);padding:8px 15px;border-radius:8px;cursor:pointer;font-family:'Orbitron',monospace;font-size:0.85rem;margin:0 5px;transition:all 0.3s;font-weight:600}
+    .sort-btn:hover,.sort-btn.active{background:var(--accent);color:#000}
+    .inventory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:40px}
+    .item-card{background:var(--card-bg);border:2px solid var(--accent);border-radius:15px;padding:30px;text-align:center;backdrop-filter:blur(10px);transition:all 0.3s}
+    .item-card:hover{transform:translateY(-5px);box-shadow:0 0 20px var(--accent)}
+    .item-icon{font-size:3rem;margin-bottom:20px}
+    .item-title{font-size:1.5rem;margin-bottom:15px;text-transform:uppercase;font-weight:700}
+    .item-count{font-size:1.2rem;color:var(--text-primary);margin-bottom:20px;opacity:0.9}
+    .use-button,.timer-button{background:var(--accent);border:none;border-radius:10px;padding:12px 25px;color:#000;font-family:'Orbitron',monospace;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s;text-transform:uppercase;margin:5px}
+    .use-button:hover,.timer-button:hover{transform:translateY(-2px);box-shadow:0 5px 20px var(--accent)}
+    .no-items{text-align:center;font-size:1.2rem;margin-top:40px;color:var(--text-primary);opacity:0.7}
+    .back-button{display:block;margin:40px auto 0;background:var(--card-bg);border:2px solid var(--accent);color:var(--text-primary);padding:10px 20px;border-radius:10px;text-align:center;font-family:'Orbitron',monospace;text-decoration:none;transition:all 0.3s;width:fit-content;font-weight:600}
+    .back-button:hover{background:var(--accent);color:#000;transform:scale(1.05)}
+    @media (max-width:768px){.title{font-size:2rem}}
   </style>
 </head>
-<body>
-  <div class="stars" id="stars"></div>
-  
+<body class="theme-starry font-medium">
+  <div class="hover-buttons">
+    <button class="hover-btn" onclick="window.location.href='index.html'">🏠 HOME</button>
+    <button class="hover-btn" onclick="toggleFullscreen()">🖥️ FULLSCREEN</button>
+  </div>
+  <div class="music-player hidden" id="musicPlayer">
+    <button class="music-btn" onclick="skipBackward()">-15s</button>
+    <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">▶️</button>
+    <button class="music-btn" onclick="skipForward()">+15s</button>
+  </div>
+  <audio id="audioPlayer" loop></audio>
   <div class="container">
     <div class="header">
       <h1 class="title">🎒 ALIEN INVENTORY</h1>
       <p class="subtitle">OWNED ITEMS DATABASE</p>
     </div>
-    
-    <div class="credits-display" id="creditsDisplay">
-      🪙 CREDITS: <span id="creditCount">0</span>
+    <div class="credits-display">🪙 CREDITS: <span id="creditCount">0</span></div>
+    <div class="sort-controls">
+      <span class="sort-label">SORT BY:</span>
+      <button class="sort-btn active" onclick="sortInventory('name')">Name</button>
+      <button class="sort-btn" onclick="sortInventory('quantity')">Quantity</button>
+      <button class="sort-btn" onclick="sortInventory('recent')">Recent</button>
     </div>
-    
-    <div class="inventory-grid" id="inventoryGrid">
-      <!-- Items will be populated by JavaScript -->
-    </div>
-    
-    <div class="no-items" id="noItemsMessage">Your inventory is empty</div>
-    
-    <div style="text-align: center;">
-      <a href="center.html" class="back-button">⬅ BACK TO MAIN MENU</a>
+    <div class="inventory-grid" id="inventoryGrid"></div>
+    <div class="no-items" id="noItemsMessage" style="display:none">Your inventory is empty</div>
+    <div style="text-align:center">
+      <a href="index.html" class="back-button">⬅ BACK TO MAIN MENU</a>
     </div>
   </div>
-
   <script>
-    // Star field generation
-    function createStars() {
-      const starsContainer = document.getElementById('stars');
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 3 + 's';
-        starsContainer.appendChild(star);
-      }
-    }
-
-    // Load credits
-    function loadCredits() {
-      return parseInt(localStorage.getItem('alienCredits') || '0');
-    }
-
-    // Update credits display
-    function updateCreditDisplay() {
-      document.getElementById('creditCount').textContent = loadCredits().toString();
-    }
-
-    // Load inventory
-    function loadInventory() {
-      const inventoryJson = localStorage.getItem('alienInventory');
-      return inventoryJson ? JSON.parse(inventoryJson) : {};
-    }
-
-    // Save inventory
-    function saveInventory(inventory) {
-      localStorage.setItem('alienInventory', JSON.stringify(inventory));
-    }
-
-    // Use item
-    function useItem(itemId) {
-      const inventory = loadInventory();
-      
-      if (inventory[itemId] > 0) {
-        // Decrease count
-        inventory[itemId]--;
-        
-        // Remove item if count is zero
-        if (inventory[itemId] === 0) {
-          delete inventory[itemId];
-        }
-        
-        saveInventory(inventory);
-        renderInventory();
-        
-        // Show success message
-        const itemName = getShopItemName(itemId);
-        alert(`🛸 SUCCESS! YOU USED A "${itemName}"`);
-      }
-    }
-
-    // Get shop item name
-    function getShopItemName(itemId) {
-      const items = getShopItems();
-      const item = items.find(i => i.id === itemId);
-      return item ? item.name : itemId;
-    }
-
-    // Get shop items
-    function getShopItems() {
-      return [
-        {
-          id: 'break30',
-          name: '30 Minutes Break',
-          icon: '🕰️',
-          price: 70,
-          description: '30 Minute Relaxation Period'
-        },
-        {
-          id: 'break60',
-          name: '1 Hour Break',
-          icon: '⏰',
-          price: 100,
-          description: '60 Minute Rest Period'
-        },
-        {
-          id: 'break120',
-          name: '2 Hour Break',
-          icon: '🛌',
-          price: 135,
-          description: '2 Hour Leisure Time'
-        },
-        {
-          id: 'breakDay',
-          name: '1 DAY Break',
-          icon: '🌴',
-          price: 215,
-          description: 'Full Day Off'
-        }
-      ];
-    }
-
-    // Render inventory
-    function renderInventory() {
-      const inventory = loadInventory();
-      const container = document.getElementById('inventoryGrid');
-      const noItemsMessage = document.getElementById('noItemsMessage');
-      container.innerHTML = '';
-      
-      if (Object.keys(inventory).length === 0) {
-        noItemsMessage.style.display = 'block';
-        return;
-      }
-      
-      noItemsMessage.style.display = 'none';
-      
-      Object.entries(inventory).forEach(([itemId, count]) => {
-        const item = getShopItems().find(i => i.id === itemId);
-        
-        if (!item) return;
-        
-        const card = document.createElement('div');
-        card.className = 'item-card';
-        
-        card.innerHTML = `
-          <div class="item-icon">${item.icon}</div>
-          <div class="item-title">${item.name}</div>
-          <div class="item-count">OWNED: ${count}</div>
-          <button class="use-button" onclick="useItem('${itemId}')">USE ITEM</button>
-        `;
-        
-        container.appendChild(card);
-      });
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      createStars();
-      updateCreditDisplay();
-      renderInventory();
-    });
+    const audioPlayer=document.getElementById('audioPlayer');
+    let currentSort='name';
+    function init(){loadSettings();updateCreditDisplay();renderInventory()}
+    function loadSettings(){const s=JSON.parse(localStorage.getItem('alienSettings')||'{}');if(s.theme)document.body.className=document.body.className.replace(/theme-\S+/,`theme-${s.theme}`);if(s.fontSize)document.body.className=document.body.className.replace(/font-\w+/,`font-${s.fontSize}`);if(s.musicPlayerVisible!==undefined)document.getElementById('musicPlayer').classList.toggle('hidden',!s.musicPlayerVisible);if(s.audioFile)audioPlayer.src=s.audioFile}
+    function updateCreditDisplay(){document.getElementById('creditCount').textContent=localStorage.getItem('alienCredits')||'0'}
+    function loadInventory(){return JSON.parse(localStorage.getItem('alienInventory')||'{}')}
+    function saveInventory(inv){localStorage.setItem('alienInventory',JSON.stringify(inv))}
+    function getShopItems(){const saved=localStorage.getItem('shopItems');return saved?JSON.parse(saved):[{id:'break30',name:'30 Min Break',icon:'🕰️',price:70},{id:'break60',name:'1 Hour Break',icon:'⏰',price:100},{id:'break120',name:'2 Hour Break',icon:'🛌',price:135},{id:'breakDay',name:'1 DAY Break',icon:'🌴',price:215}]}
+    function useItem(itemId){const inv=loadInventory();if(inv[itemId]>0){inv[itemId]--;if(inv[itemId]===0)delete inv[itemId];saveInventory(inv);renderInventory();const item=getShopItems().find(i=>i.id===itemId);alert(`🛸 SUCCESS! YOU USED A "${item?.name||'ITEM'}"`)}}
+    function startTimerWithItem(itemId){const item=getShopItems().find(i=>i.id===itemId);if(!item)return;const match=item.name.match(/(\d+)\s*(min|hour|day)/i);if(!match)return alert('Cannot determine timer duration!');let minutes=parseInt(match[1]);const unit=match[2].toLowerCase();if(unit==='hour')minutes*=60;if(unit==='day')minutes*=1440;localStorage.setItem('pomodoroSettings',JSON.stringify({focusTime:minutes,breakTime:10,credits:0,autoStart:false}));window.location.href='pomodoro.html'}
+    function sortInventory(type){currentSort=type;document.querySelectorAll('.sort-btn').forEach(btn=>btn.classList.remove('active'));event.target.classList.add('active');renderInventory()}
+    function renderInventory(){const inv=loadInventory();const shopItems=getShopItems();const container=document.getElementById('inventoryGrid');const noItemsMsg=document.getElementById('noItemsMessage');container.innerHTML='';if(Object.keys(inv).length===0){noItemsMsg.style.display='block';return}noItemsMsg.style.display='none';let entries=Object.entries(inv).map(([id,count])=>({id,count,item:shopItems.find(i=>i.id===id)})).filter(e=>e.item);if(currentSort==='name')entries.sort((a,b)=>a.item.name.localeCompare(b.item.name));else if(currentSort==='quantity')entries.sort((a,b)=>b.count-a.count);else if(currentSort==='recent')entries.reverse();entries.forEach(({id,count,item})=>{const card=document.createElement('div');card.className='item-card';card.innerHTML=`<div class="item-icon">${item.icon}</div><div class="item-title">${item.name}</div><div class="item-count">OWNED: ${count}</div><button class="use-button" onclick="useItem('${id}')">USE ITEM</button><button class="timer-button" onclick="startTimerWithItem('${id}')">⏱️ START TIMER</button>`;container.appendChild(card)})}
+    function toggleMusic(){if(audioPlayer.paused){audioPlayer.play();document.getElementById('playPauseBtn').textContent='⏸️'}else{audioPlayer.pause();document.getElementById('playPauseBtn').textContent='▶️'}}
+    function skipBackward(){audioPlayer.currentTime=Math.max(0,audioPlayer.currentTime-15)}
+    function skipForward(){audioPlayer.currentTime=Math.min(audioPlayer.duration,audioPlayer.currentTime+15)}
+    function toggleFullscreen(){if(!document.fullscreenElement){document.documentElement.requestFullscreen()}else{document.exitFullscreen()}}
+    document.addEventListener('DOMContentLoaded',init);
   </script>
 </body>
 </html>

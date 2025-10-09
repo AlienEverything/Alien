@@ -3,359 +3,276 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🛍️ Alien Shop</title>
+  <title>🛒 Alien Shop</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron :wght@400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Orbitron', monospace; min-height: 100vh; color: var(--text-primary); overflow-x: hidden; position: relative; transition: all 0.5s ease; }
     
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    body.theme-1,body.theme-2,body.theme-13 { background: linear-gradient(135deg, #ffc0e5 0%, #d4a5ff 50%, #a5c4ff 100%); --text-primary: #fff; --accent: #ff1493; --card-bg: rgba(255, 20, 147, 0.2); }
+    body.theme-3 { background: linear-gradient(135deg, #001a33 0%, #003d5c 50%, #00ffc8 100%); --text-primary: #00ffc8; --accent: #00ffc8; --card-bg: rgba(0, 255, 200, 0.2); }
+    body.theme-4,body.theme-5 { background: linear-gradient(135deg, #4a2c0a 0%, #8b5a00 50%, #ffb347 100%); --text-primary: #ffcc80; --accent: #ff9800; --card-bg: rgba(255, 152, 0, 0.2); }
+    body.theme-6 { background: linear-gradient(135deg, #1a0000 0%, #4d0000 50%, #ff4500 100%); --text-primary: #ff6347; --accent: #ff4500; --card-bg: rgba(255, 69, 0, 0.2); }
+    body.theme-7,body.theme-8,body.theme-9 { background: linear-gradient(135deg, #001a33 0%, #003d66 50%, #0088cc 100%); --text-primary: #87ceeb; --accent: #1e90ff; --card-bg: rgba(30, 144, 255, 0.2); }
+    body.theme-10,body.theme-11 { background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 50%, #4a7c4a 100%); --text-primary: #90ee90; --accent: #32cd32; --card-bg: rgba(50, 205, 50, 0.2); }
+    body.theme-12 { background: linear-gradient(135deg, #ff9a8b 0%, #ff6a88 50%, #ff99ac 100%); --text-primary: #fff; --accent: #ff1493; --card-bg: rgba(255, 255, 255, 0.2); }
+    body.theme-starry { background: linear-gradient(135deg, #1a0033 0%, #2d004d 50%, #4d1a7f 100%); --text-primary: #e0b0ff; --accent: #b77bff; --card-bg: rgba(224, 176, 255, 0.2); }
+    body.theme-15,body.theme-16,body.theme-17,body.theme-18,body.theme-19 { background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%); --text-primary: #90e0ef; --accent: #00b4d8; --card-bg: rgba(0, 180, 216, 0.2); }
+    body.theme-20,body.theme-26,body.theme-27,body.theme-28,body.theme-29,body.theme-44,body.theme-45,body.theme-46,body.theme-47 { background: linear-gradient(135deg, #0a0015 0%, #1a0033 50%, #2d0052 100%); --text-primary: #b794f6; --accent: #805ad5; --card-bg: rgba(183, 148, 246, 0.2); }
+    body.theme-21 { background: linear-gradient(135deg, #1a0a00 0%, #331a0a 50%, #4d2a1a 100%); --text-primary: #ffa07a; --accent: #ff6347; --card-bg: rgba(255, 160, 122, 0.2); }
+    body.theme-22,body.theme-23,body.theme-24,body.theme-25,body.theme-34,body.theme-35,body.theme-36,body.theme-37,body.theme-38 { background: linear-gradient(135deg, #2d1810 0%, #4a2c1a 50%, #5c3a20 100%); --text-primary: #d4af37; --accent: #cd853f; --card-bg: rgba(212, 175, 55, 0.2); }
+    body.theme-30,body.theme-33 { background: linear-gradient(135deg, #e8e8e8 0%, #f0f0f0 50%, #f8f8f8 100%); --text-primary: #333; --accent: #666; --card-bg: rgba(255, 255, 255, 0.5); }
+    body.theme-31,body.theme-32 { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%); --text-primary: #e0e0e0; --accent: #999; --card-bg: rgba(255, 255, 255, 0.15); }
+    body.theme-39,body.theme-40,body.theme-41,body.theme-42,body.theme-43 { background: linear-gradient(135deg, #002b36 0%, #073642 50%, #0d4a5a 100%); --text-primary: #2aa198; --accent: #268bd2; --card-bg: rgba(42, 161, 152, 0.2); }
     
-    body {
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
-      min-height: 100vh;
-      color: #00ff88;
-      overflow-x: hidden;
-      position: relative;
-    }
+    body.font-small { font-size: 14px; }
+    body.font-medium { font-size: 16px; }
+    body.font-large { font-size: 18px; }
     
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    .hover-buttons { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; gap: 10px; }
+    .hover-btn { background: var(--card-bg); border: 2px solid var(--accent); color: var(--text-primary); padding: 10px 15px; border-radius: 10px; cursor: pointer; font-family: 'Orbitron', monospace; font-size: 0.9rem; backdrop-filter: blur(10px); font-weight: 600; transition: transform 0.2s; }
+    .hover-btn:hover { transform: scale(1.05); }
     
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
+    .music-player { position: fixed; bottom: 20px; right: 20px; background: var(--card-bg); border: 2px solid var(--accent); border-radius: 15px; padding: 15px; backdrop-filter: blur(10px); z-index: 1000; display: flex; gap: 10px; }
+    .music-player.hidden { display: none; }
+    .music-btn { background: var(--accent); border: none; color: #000; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', monospace; font-weight: 700; transition: transform 0.2s; }
+    .music-btn:hover { transform: scale(1.1); }
     
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: #ffffff;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: twinkle 3s infinite alternate;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; position: relative; z-index: 10; }
+    .header { text-align: center; margin-bottom: 40px; background: var(--card-bg); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; backdrop-filter: blur(10px); }
+    .title { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; text-shadow: 0 0 20px var(--accent); color: var(--text-primary); }
+    .subtitle { font-size: 1.1rem; opacity: 0.8; letter-spacing: 2px; color: var(--text-primary); }
     
-    @keyframes twinkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
+    .credits-display { text-align: center; font-size: 1.2rem; margin: 20px 0; color: var(--accent); font-weight: 700; }
     
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 10;
-    }
+    .shop-controls { text-align: center; margin-bottom: 30px; }
+    .control-btn { background: var(--accent); color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', monospace; font-weight: 700; margin: 0 5px; }
     
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-      animation: pulse 2s infinite;
-    }
+    .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+    .item-card { background: var(--card-bg); border: 2px solid var(--accent); border-radius: 15px; padding: 30px; text-align: center; backdrop-filter: blur(10px); transition: all 0.3s; }
+    .item-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--accent); }
+    .item-icon { font-size: 3rem; margin-bottom: 20px; }
+    .item-title { font-size: 1.5rem; margin-bottom: 15px; text-transform: uppercase; font-weight: 700; }
+    .item-price { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 20px; opacity: 0.9; }
     
-    @keyframes pulse {
-      0% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.3); }
-      50% { box-shadow: 0 0 50px rgba(0, 255, 136, 0.6); }
-      100% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.3); }
-    }
+    .buy-button { background: var(--accent); border: none; border-radius: 10px; padding: 12px 25px; color: #000; font-family: 'Orbitron', monospace; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
+    .buy-button:hover { transform: translateY(-2px); box-shadow: 0 5px 20px var(--accent); }
+    .disabled { opacity: 0.5; cursor: not-allowed; }
     
-    .title {
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin-bottom: 10px;
-      text-shadow: 0 0 20px #00ff88;
-      background: linear-gradient(45deg, #00ff88, #00ccff, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    .back-button { display: block; margin: 40px auto 0; background: var(--card-bg); border: 2px solid var(--accent); color: var(--text-primary); padding: 10px 20px; border-radius: 10px; text-align: center; font-family: 'Orbitron', monospace; text-decoration: none; transition: all 0.3s; width: fit-content; font-weight: 600; }
+    .back-button:hover { background: var(--accent); color: #000; transform: scale(1.05); }
     
-    .subtitle {
-      font-size: 1.1rem;
-      opacity: 0.8;
-      letter-spacing: 2px;
-    }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+    .modal.active { display: flex; }
+    .modal-content { background: var(--card-bg); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; max-width: 500px; width: 100%; backdrop-filter: blur(10px); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+    .close-btn { background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
     
-    .credits-display {
-      text-align: center;
-      font-size: 1.2rem;
-      margin: 20px 0;
-      color: #00ccff;
-    }
+    .config-group { margin-bottom: 15px; }
+    .config-label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-primary); font-size: 0.9rem; }
+    .config-input { background: rgba(255, 255, 255, 0.1); border: 2px solid var(--accent); border-radius: 8px; padding: 10px; color: var(--text-primary); font-family: 'Orbitron', monospace; width: 100%; }
+    .save-btn { background: var(--accent); color: #000; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', monospace; font-weight: 700; width: 100%; margin-top: 15px; }
     
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    
-    .item-card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff88;
-      border-radius: 15px;
-      padding: 30px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-    
-    .item-card:hover {
-      transform: translateY(-5px);
-      border-color: #00ccff;
-      box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
-    }
-    
-    .item-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-    
-    .item-title {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-    }
-    
-    .item-price {
-      font-size: 1.2rem;
-      color: #00ccff;
-      margin-bottom: 20px;
-    }
-    
-    .buy-button {
-      background: linear-gradient(45deg, #00ff88, #00ccff);
-      border: none;
-      border-radius: 10px;
-      padding: 12px 25px;
-      color: #000;
-      font-family: 'Orbitron', monospace;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .buy-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
-    }
-    
-    .disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    
-    .back-button {
-      display: block;
-      margin: 40px auto 0;
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-family: 'Orbitron', monospace;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      width: fit-content;
-    }
-    
-    .back-button:hover {
-      background: #00ff88;
-      color: #000;
-      transform: scale(1.05);
-    }
-    
-    @media (max-width: 768px) {
-      .title {
-        font-size: 2rem;
-      }
-    }
+    @media (max-width: 768px) { .title { font-size: 2rem; } }
   </style>
 </head>
-<body>
-  <div class="stars" id="stars"></div>
+<body class="theme-starry font-medium">
+  
+  <div class="hover-buttons">
+    <button class="hover-btn" onclick="window.location.href='index.html'">🏠 HOME</button>
+    <button class="hover-btn" onclick="toggleFullscreen()">🖥️ FULLSCREEN</button>
+  </div>
+  
+  <div class="music-player hidden" id="musicPlayer">
+    <button class="music-btn" onclick="skipBackward()">-15s</button>
+    <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">▶️</button>
+    <button class="music-btn" onclick="skipForward()">+15s</button>
+  </div>
+  
+  <audio id="audioPlayer" loop></audio>
   
   <div class="container">
     <div class="header">
-      <h1 class="title">🛍️ ALIEN SHOP</h1>
+      <h1 class="title">🛒 ALIEN SHOP</h1>
       <p class="subtitle">BREAK TIME MARKETPLACE</p>
     </div>
     
-    <div class="credits-display" id="creditsDisplay">
+    <div class="credits-display">
       🪙 CREDITS: <span id="creditCount">0</span>
     </div>
     
-    <div class="shop-grid" id="shopItems">
-      <!-- Items will be populated by JavaScript -->
+    <div class="shop-controls">
+      <button class="control-btn" onclick="openPriceEditor()">💰 Edit Prices</button>
+      <button class="control-btn" onclick="openAddItem()">➕ Add Custom Item</button>
     </div>
     
+    <div class="shop-grid" id="shopItems"></div>
+    
     <div style="text-align: center;">
-      <a href="center.html" class="back-button">⬅ BACK TO MAIN MENU</a>
+      <a href="index.html" class="back-button">⬅ BACK TO MAIN MENU</a>
+    </div>
+  </div>
+
+  <div class="modal" id="priceModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">💰 EDIT PRICES</h2>
+        <button class="close-btn" onclick="closePriceEditor()">✕</button>
+      </div>
+      <div id="priceEditorContent"></div>
+      <button class="save-btn" onclick="savePrices()">SAVE PRICES</button>
+    </div>
+  </div>
+
+  <div class="modal" id="addItemModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">➕ ADD CUSTOM ITEM</h2>
+        <button class="close-btn" onclick="closeAddItem()">✕</button>
+      </div>
+      <div class="config-group">
+        <label class="config-label">Item Name</label>
+        <input type="text" class="config-input" id="newItemName" placeholder="e.g., 3 Hour Break">
+      </div>
+      <div class="config-group">
+        <label class="config-label">Item Icon (emoji)</label>
+        <input type="text" class="config-input" id="newItemIcon" placeholder="e.g., 🎯" maxlength="2">
+      </div>
+      <div class="config-group">
+        <label class="config-label">Price (credits)</label>
+        <input type="number" class="config-input" id="newItemPrice" placeholder="e.g., 150" min="1">
+      </div>
+      <button class="save-btn" onclick="saveNewItem()">ADD ITEM</button>
     </div>
   </div>
 
   <script>
-    // Star field generation
-    function createStars() {
-      const starsContainer = document.getElementById('stars');
-      for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 3 + 's';
-        starsContainer.appendChild(star);
-      }
+    const audioPlayer = document.getElementById('audioPlayer');
+    let shopItems = [];
+
+    function init() {
+      loadSettings();
+      updateCreditDisplay();
+      loadShopItems();
+      renderShop();
     }
 
-    // Load credits
-    function loadCredits() {
-      return parseInt(localStorage.getItem('alienCredits') || '0');
+    function loadSettings() {
+      const settings = JSON.parse(localStorage.getItem('alienSettings') || '{}');
+      if (settings.theme) document.body.className = document.body.className.replace(/theme-\S+/, `theme-${settings.theme}`);
+      if (settings.fontSize) document.body.className = document.body.className.replace(/font-\w+/, `font-${settings.fontSize}`);
+      if (settings.musicPlayerVisible !== undefined) document.getElementById('musicPlayer').classList.toggle('hidden', !settings.musicPlayerVisible);
+      if (settings.audioFile) audioPlayer.src = settings.audioFile;
     }
 
-    // Save credits
-    function saveCredits(credits) {
-      localStorage.setItem('alienCredits', credits.toString());
+    function loadShopItems() {
+      const saved = localStorage.getItem('shopItems');
+      shopItems = saved ? JSON.parse(saved) : [
+        { id: 'break30', name: '30 Min Break', icon: '🕰️', price: 70 },
+        { id: 'break60', name: '1 Hour Break', icon: '⏰', price: 100 },
+        { id: 'break120', name: '2 Hour Break', icon: '🛌', price: 135 },
+        { id: 'breakDay', name: '1 DAY Break', icon: '🌴', price: 215 }
+      ];
     }
 
-    // Update credits display
+    function saveShopItems() {
+      localStorage.setItem('shopItems', JSON.stringify(shopItems));
+    }
+
     function updateCreditDisplay() {
-      document.getElementById('creditCount').textContent = loadCredits().toString();
+      document.getElementById('creditCount').textContent = localStorage.getItem('alienCredits') || '0';
     }
 
-    // Load inventory
-    function loadInventory() {
-      const inventoryJson = localStorage.getItem('alienInventory');
-      return inventoryJson ? JSON.parse(inventoryJson) : {};
-    }
-
-    // Save inventory
-    function saveInventory(inventory) {
-      localStorage.setItem('alienInventory', JSON.stringify(inventory));
-    }
-
-    // Buy item
     function buyItem(itemId) {
-      const items = getShopItems();
-      const item = items.find(i => i.id === itemId);
-      
+      const item = shopItems.find(i => i.id === itemId);
       if (!item) return;
       
-      const currentCredits = loadCredits();
-      
+      const currentCredits = parseInt(localStorage.getItem('alienCredits') || '0');
       if (currentCredits >= item.price) {
-        const inventory = loadInventory();
-        
-        // Initialize count if not exists
-        if (!inventory[itemId]) {
-          inventory[itemId] = 0;
-        }
-        
-        // Add item
-        inventory[itemId]++;
-        
-        // Deduct credits
-        saveCredits(currentCredits - item.price);
-        saveInventory(inventory);
-        
+        const inventory = JSON.parse(localStorage.getItem('alienInventory') || '{}');
+        inventory[itemId] = (inventory[itemId] || 0) + 1;
+        localStorage.setItem('alienCredits', (currentCredits - item.price).toString());
+        localStorage.setItem('alienInventory', JSON.stringify(inventory));
         updateCreditDisplay();
         renderShop();
-        
         alert(`🛸 SUCCESS! YOU BOUGHT A "${item.name}"`);
       } else {
         alert("⚠️ INSUFFICIENT CREDITS");
       }
     }
 
-    // Get shop items
-    function getShopItems() {
-      return [
-        {
-          id: 'break30',
-          name: '30 Min Break',
-          icon: '🕰️',
-          price: 70,
-          description: '30 Minute Relaxation Period'
-        },
-        {
-          id: 'break60',
-          name: '1 Hour Break',
-          icon: '⏰',
-          price: 100,
-          description: '60 Minute Rest Period'
-        },
-        {
-          id: 'break120',
-          name: '2 Hour Break',
-          icon: '🛌',
-          price: 135,
-          description: '2 Hour Leisure Time'
-        },
-        {
-          id: 'breakDay',
-          name: '1 DAY Break',
-          icon: '🌴',
-          price: 215,
-          description: 'Full Day Off'
-        }
-      ];
-    }
-
-    // Render shop items
     function renderShop() {
-      const shopItems = getShopItems();
       const container = document.getElementById('shopItems');
-      container.innerHTML = '';
-      
-      shopItems.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'item-card';
-        
-        const currentCredits = loadCredits();
+      const currentCredits = parseInt(localStorage.getItem('alienCredits') || '0');
+      container.innerHTML = shopItems.map(item => {
         const isAffordable = currentCredits >= item.price;
-        
-        card.innerHTML = `
-          <div class="item-icon">${item.icon}</div>
-          <div class="item-title">${item.name}</div>
-          <div class="item-price">PRICE: ${item.price} CREDITS</div>
-          <button class="buy-button ${!isAffordable ? 'disabled' : ''}" ${!isAffordable ? 'disabled' : ''} onclick="buyItem('${item.id}')">BUY ITEM</button>
+        return `
+          <div class="item-card">
+            <div class="item-icon">${item.icon}</div>
+            <div class="item-title">${item.name}</div>
+            <div class="item-price">💰 ${item.price} CREDITS</div>
+            <button class="buy-button ${!isAffordable ? 'disabled' : ''}" ${!isAffordable ? 'disabled' : ''} onclick="buyItem('${item.id}')">BUY ITEM</button>
+          </div>
         `;
-        
-        container.appendChild(card);
-      });
+      }).join('');
     }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      createStars();
-      updateCreditDisplay();
+    function openPriceEditor() {
+      document.getElementById('priceEditorContent').innerHTML = shopItems.map(item => `
+        <div class="config-group">
+          <label class="config-label">${item.icon} ${item.name}</label>
+          <input type="number" class="config-input" id="price_${item.id}" value="${item.price}" min="1">
+        </div>
+      `).join('');
+      document.getElementById('priceModal').classList.add('active');
+    }
+
+    function closePriceEditor() {
+      document.getElementById('priceModal').classList.remove('active');
+    }
+
+    function savePrices() {
+      shopItems.forEach(item => {
+        const input = document.getElementById(`price_${item.id}`);
+        if (input) item.price = parseInt(input.value) || item.price;
+      });
+      saveShopItems();
       renderShop();
-    });
+      closePriceEditor();
+    }
+
+    function openAddItem() {
+      document.getElementById('newItemName').value = '';
+      document.getElementById('newItemIcon').value = '';
+      document.getElementById('newItemPrice').value = '';
+      document.getElementById('addItemModal').classList.add('active');
+    }
+
+    function closeAddItem() {
+      document.getElementById('addItemModal').classList.remove('active');
+    }
+
+    function saveNewItem() {
+      const name = document.getElementById('newItemName').value.trim();
+      const icon = document.getElementById('newItemIcon').value.trim();
+      const price = parseInt(document.getElementById('newItemPrice').value);
+      if (!name || !icon || !price) return alert('Please fill in all fields!');
+      shopItems.push({ id: 'custom_' + Date.now(), name, icon, price });
+      saveShopItems();
+      renderShop();
+      closeAddItem();
+    }
+
+    function toggleMusic() {
+      if (audioPlayer.paused) { audioPlayer.play(); document.getElementById('playPauseBtn').textContent = '⏸️'; }
+      else { audioPlayer.pause(); document.getElementById('playPauseBtn').textContent = '▶️'; }
+    }
+    function skipBackward() { audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 15); }
+    function skipForward() { audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 15); }
+    function toggleFullscreen() { if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); } else { document.exitFullscreen(); } }
+
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
